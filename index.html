@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#19352b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="By the Cube">
+<title>By the Cube · Meal Prep Dashboard</title>
+<style>
+:root{--forest:#19352b;--leaf:#2e5142;--peach:#efa879;--cream:#f7f5ef;--ink:#1f332b;--muted:#65736b;--line:#dfe5dd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+header{background:var(--forest);color:white;padding:22px max(20px,calc((100vw - 1060px)/2)) 38px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:800;letter-spacing:-.04em;font-size:22px}.eyebrow{color:var(--peach);font-weight:800;letter-spacing:.17em;text-transform:uppercase;font-size:11px}
+h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,72px);line-height:1.03;letter-spacing:-.04em;margin:30px 0 12px}header p{color:#d5e1d8;max-width:620px;margin:0}.pill{background:#ffffff18;border:1px solid #ffffff33;padding:7px 12px;border-radius:99px;font-size:12px}
+main{max-width:1100px;margin:auto;padding:25px 20px 90px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-45px;position:relative}.stat,.panel,.tile{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:0 7px 24px #19352b0a}.stat{padding:17px}.stat b{font-size:25px;display:block}.stat small{color:var(--muted)}
+section{margin-top:36px}h2{font-size:25px;letter-spacing:-.04em;margin:0 0 4px}.sub{color:var(--muted);font-size:14px;margin:0 0 18px}.collection{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:var(--forest);border-radius:22px;color:white;min-height:260px}.collection .copy{padding:28px}.collection h3{font: bold clamp(29px,4vw,42px)/1.08 Georgia,serif;margin:14px 0}.collection p{color:#d4e0d7}.collection .photo{background:linear-gradient(45deg,#1d392d44,#1d392d11),url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1000&auto=format&fit=crop') center/cover}.action{display:inline-block;border:0;border-radius:12px;background:var(--peach);color:#1e3028;padding:12px 17px;font-weight:800;margin-top:10px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{padding:20px}.panel h3{margin:0 0 5px;font-size:20px}.hint{color:var(--muted);font-size:13px;margin:0 0 16px}
+.cuberow{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;border-top:1px solid var(--line);padding:11px 0}.cuberow:first-child{border:0}.cuberow small{display:block;color:var(--muted);font-size:12px}.stepper{display:flex;align-items:center;gap:10px}.stepper button{width:31px;height:31px;border:1px solid var(--line);border-radius:9px;background:#f4f7f2;font-weight:bold}.stepper strong{min-width:18px;text-align:center}
+.total{background:#edf3eb;padding:16px;border-radius:14px;margin-top:14px}.total b{font-size:29px}.macros{display:flex;justify-content:space-between;gap:7px;font-size:13px;color:#53685c}.tiny{font-size:12px;color:var(--muted)}.inventory-item{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:12px 0;gap:10px}.inventory-item:last-child{border:0}.qty{display:flex;align-items:center;gap:8px}.qty button{width:30px;height:30px;border-radius:8px;background:#eef3ec;border:1px solid var(--line)}.qty b{min-width:25px;text-align:center}.listitem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.listitem input[type=checkbox]{width:19px;height:19px;accent-color:var(--leaf)}.listitem.done span{text-decoration:line-through;color:#8b968f}.listitem span{flex:1;overflow-wrap:anywhere}.remove{border:0;background:transparent;color:#a14e42;padding:5px}.add{display:flex;gap:8px;margin-top:15px}.add input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:10px}.add button,.outline{border:1px solid var(--leaf);border-radius:10px;background:var(--leaf);color:white;padding:10px 13px;font-weight:700}.outline{background:white;color:var(--leaf)}.preset{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.preset button{border:1px solid var(--line);border-radius:20px;background:#f4f7f2;padding:7px 10px;font-size:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{font-size:13px;color:#d6e3d9}nav a:hover{text-decoration:underline}
+@media(max-width:700px){header{padding:20px 20px 72px}.top{align-items:flex-start}nav{justify-content:flex-end}nav a{font-size:12px}.stats{margin-top:-48px}.stat{padding:12px}.stat b{font-size:22px}.stat small{font-size:11px}.collection{grid-template-columns:1fr}.collection .photo{min-height:175px;grid-row:1}.collection .copy{padding:22px}.tools{grid-template-columns:1fr}.panel{padding:17px}h2{font-size:23px}}
+</style></head><body>
+<header><div class="top"><div class="brand">◈ By the Cube.</div><nav><a href="#collections">Collections</a><a href="#builder">Meal builder</a><a href="#inventory">Inventory</a><a href="#shopping">Shopping</a></nav></div>
+<div class="eyebrow" style="margin-top:34px">Your freezer meal prep headquarters</div><h1>Cook once.<br>Mix all week.</h1><p>Build meals from fully cooked frozen cubes. Explore recipes, plan your macros, track what's in the freezer, and shop for the next batch.</p></header>
+<main>
+<div class="stats"><div class="stat"><b>4</b><small>Recipes</small></div><div class="stat"><b id="stockcount">0</b><small>Cubes in freezer</small></div><div class="stat"><b id="mealcal">0</b><small>Planned calories</small></div></div>
+<section id="collections"><h2>Recipe collections</h2><p class="sub">Your growing collection of mix-and-match meals.</p>
+<div class="collection"><div class="copy"><span class="eyebrow">Collection 01 · 4 recipes</span><h3>Southwest<br>by the Cube</h3><p>Creamy chipotle chicken, tomato rice, savory refried beans, and roasted peppers & onions.</p><a class="action" href="recipes/southwest.html">Open all four recipes ↗</a></div><div class="photo" role="img" aria-label="Food and vegetables"></div></div></section>
+<section><h2>Plan & organize</h2><p class="sub">These tools work directly on this page. Inventory and shopping lists save on this device.</p>
+<div class="tools">
+<div class="panel" id="builder"><h3>◫ Meal builder</h3><p class="hint">Choose how many frozen cubes go into one meal.</p><div id="builderrows"></div><div class="total"><div><b id="cal">0</b> kcal</div><div class="macros"><span><strong id="protein">0</strong>g protein</span><span><strong id="carbs">0</strong>g carbs</span><span><strong id="fat">0</strong>g fat</span></div></div><p class="tiny">Estimated values, based on recipe targets; verify actual yields and labels.</p><button class="outline" id="resetmeal">Clear meal</button></div>
+<div class="panel" id="inventory"><h3>▤ Freezer inventory</h3><p class="hint">Track how many prepared cubes you have left. Tap + or − as you use or freeze portions.</p><div id="inventoryrows"></div><p class="tiny">Stored locally in this browser, not synced across devices.</p></div>
+<div class="panel" id="shopping"><h3>☷ Shopping list</h3><p class="hint">Add ingredients, check them off, or load the Southwest starter list.</p><div id="shoppingrows"></div><form class="add" id="addform"><input id="newitem" aria-label="New shopping item" placeholder="Add an ingredient…" required maxlength="120"><button>Add</button></form><div class="preset"><button id="loadpreset">+ Southwest ingredients</button><button id="clearchecked">Remove checked</button></div></div>
+<div class="panel"><h3>✦ Next batch</h3><p class="hint">Your workflow at a glance.</p><p><strong>1.</strong> Choose a recipe collection.</p><p><strong>2.</strong> Cook and portion into ½-cup or 1-cup silicone molds.</p><p><strong>3.</strong> Freeze, transfer to labeled bags, and update your inventory.</p><p><strong>4.</strong> Build tomorrow's meal from your available cubes.</p><a class="action" href="recipes/southwest.html">Browse Southwest recipes →</a></div>
+</div></section></main>
+<footer>Southwest by the Cube · Built for flexible freezer meal prep · Nutrition values are estimates.</footer>
+<script>
+const recipes=[
+{id:"chicken",name:"Creamy chipotle chicken",size:"1 cup",cal:260,p:34,c:5,f:9},
+{id:"rice",name:"Spanish-style rice",size:"½ cup",cal:145,p:3,c:28,f:2},
+{id:"beans",name:"Refried beans",size:"½ cup",cal:100,p:5,c:16,f:1},
+{id:"veg",name:"Peppers & onions",size:"½ cup",cal:45,p:1,c:8,f:2}
+];
+const $=id=>document.getElementById(id);
+const safeRead=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
+let meal=Object.fromEntries(recipes.map(r=>[r.id,0]));
+let stock=safeRead("cube-stock-v1",Object.fromEntries(recipes.map(r=>[r.id,0])));
+let shopping=safeRead("cube-shopping-v1",[]);
+const save=()=>{try{localStorage.setItem("cube-stock-v1",JSON.stringify(stock));localStorage.setItem("cube-shopping-v1",JSON.stringify(shopping))}catch{}};
+function renderMeal(){
+$("builderrows").innerHTML=recipes.map(r=>`<div class="cuberow"><div><strong>${r.name}</strong><small>${r.size} · ~${r.cal} kcal</small></div><div class="stepper"><button data-meal="${r.id}" data-delta="-1" aria-label="Remove ${r.name}">−</button><strong>${meal[r.id]}</strong><button data-meal="${r.id}" data-delta="1" aria-label="Add ${r.name}">+</button></div></div>`).join("");
+const sum=k=>recipes.reduce((a,r)=>a+r[k]*meal[r.id],0);
+$("cal").textContent=sum("cal");$("mealcal").textContent=sum("cal");$("protein").textContent=sum("p");$("carbs").textContent=sum("c");$("fat").textContent=sum("f");
+}
+function renderStock(){
+$("inventoryrows").innerHTML=recipes.map(r=>`<div class="inventory-item"><div><strong>${r.name}</strong><div class="tiny">${r.size} cubes</div></div><div class="qty"><button data-stock="${r.id}" data-delta="-1" aria-label="Remove one ${r.name} cube">−</button><b>${stock[r.id]||0}</b><button data-stock="${r.id}" data-delta="1" aria-label="Add one ${r.name} cube">+</button></div></div>`).join("");
+$("stockcount").textContent=recipes.reduce((n,r)=>n+(stock[r.id]||0),0);
+}
+function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderShopping(){
+$("shoppingrows").innerHTML=shopping.length?shopping.map((item,i)=>`<div class="listitem ${item.done?'done':''}"><input type="checkbox" data-check="${i}" ${item.done?'checked':''} aria-label="Bought ${escapeHTML(item.name)}"><span>${escapeHTML(item.name)}</span><button class="remove" data-remove="${i}" aria-label="Remove ${escapeHTML(item.name)}">✕</button></div>`).join(""):'<p class="tiny">No items yet. Add your next shopping trip below.</p>';
+}
+document.addEventListener("click",e=>{
+const m=e.target.closest("[data-meal]");if(m){meal[m.dataset.meal]=Math.max(0,meal[m.dataset.meal]+Number(m.dataset.delta));renderMeal()}
+const s=e.target.closest("[data-stock]");if(s){stock[s.dataset.stock]=Math.max(0,(stock[s.dataset.stock]||0)+Number(s.dataset.delta));save();renderStock()}
+const d=e.target.closest("[data-remove]");if(d){shopping.splice(Number(d.dataset.remove),1);save();renderShopping()}
+});
+document.addEventListener("change",e=>{if(e.target.matches("[data-check]")){shopping[Number(e.target.dataset.check)].done=e.target.checked;save();renderShopping()}});
+$("resetmeal").onclick=()=>{recipes.forEach(r=>meal[r.id]=0);renderMeal()};
+$("addform").onsubmit=e=>{e.preventDefault();const name=$("newitem").value.trim();if(name){shopping.push({name,done:false});$("newitem").value="";save();renderShopping()}};
+$("loadpreset").onclick=()=>{const preset=["2 lb boneless skinless chicken breast","Chipotles in adobo","Reduced-fat cream cheese","Plain nonfat Greek yogurt","Chicken broth","Long-grain white rice","Tomato sauce","2 cans Rosarita No Fat refried beans","Red and yellow bell peppers","Poblano peppers","Yellow onions","Garlic","Lime","Cumin","Smoked paprika","Avocado oil"];const existing=new Set(shopping.map(x=>x.name.toLowerCase()));preset.forEach(name=>{if(!existing.has(name.toLowerCase()))shopping.push({name,done:false})});save();renderShopping()};
+$("clearchecked").onclick=()=>{shopping=shopping.filter(x=>!x.done);save();renderShopping()};
+renderMeal();renderStock();renderShopping();
+</script></body></html>
